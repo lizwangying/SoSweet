@@ -4,7 +4,7 @@
 
 This app is specially designed for couples. Just want to practice some function I have learned.   
 The main feature may contains:
->  * **CHAT**   User can DIY images as key words. When your message contains these words it can spread the image you have set. Just like a image rain.   
+> * **CHAT**   User can DIY images as key words. When your message contains these words it can spread the image you have set. Just like a image rain.   
 * **Anniversary Reminder**  Keep up every day you need to remember. The day is comming, app will send you nitification to remind you.   
 * **Topic** This is a discuss and share section. You can comment.
 * **Post** Keep every single moments you worth to memory.
@@ -18,7 +18,7 @@ The main feature may contains:
 * **achievement** Do somthing for some days you can win a medal.
 * **Travel** Some suggestions about places for couples to travel. You can share on get advieses.
 
-This app specially develop for Mr Li. :smile: :kiss: :love:      
+This app specially develop for Mr Li. :smile: :kiss: :heart:      
 
 [甜甜哒中文Readme]:(https://lizwangying.wordpress.com/2016/12/15/%e7%94%9c%e7%94%9c%e5%93%92%ef%bc%88sosweet%ef%bc%89%e5%8a%9f%e8%83%bd%e9%9c%80%e6%b1%82/)
  
