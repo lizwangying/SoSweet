@@ -20,5 +20,5 @@ The main feature may contains:
 
 This app specially develop for Mr Li. :smile: :kiss: :heart:      
 
-[甜甜哒中文Readme]:(https://lizwangying.wordpress.com/2016/12/15/%e7%94%9c%e7%94%9c%e5%93%92%ef%bc%88sosweet%ef%bc%89%e5%8a%9f%e8%83%bd%e9%9c%80%e6%b1%82/)
+[甜甜哒中文Readme](https://lizwangying.wordpress.com/2016/12/15/%e7%94%9c%e7%94%9c%e5%93%92%ef%bc%88sosweet%ef%bc%89%e5%8a%9f%e8%83%bd%e9%9c%80%e6%b1%82/)
  
