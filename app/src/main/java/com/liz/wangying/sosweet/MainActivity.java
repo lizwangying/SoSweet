@@ -47,9 +47,6 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-            //配置ssh测试
-            //配置ssh测试
-            //配置ssh测试
 
         // 初始化
         WilddogOptions options = new WilddogOptions.Builder().setSyncUrl("https://sosweet.wilddogio.com").build();
