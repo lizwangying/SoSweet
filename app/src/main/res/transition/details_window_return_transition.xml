@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<transitionSet xmlns:android="http://schemas.android.com/apk/res/android"
+    android:transitionOrdering="sequential"
+    android:duration="500">
+
+    <slide android:slideEdge="bottom">
+        <targets>
+            <target android:targetId="@id/details_container" />
+        </targets>
+    </slide>
+</transitionSet>

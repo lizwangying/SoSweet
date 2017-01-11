@@ -1,5 +1,8 @@
 package com.liz.wangying.sosweet;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.NavigationView;
@@ -12,6 +15,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.liz.wangying.sosweet.model.Banner;
@@ -52,12 +56,26 @@ public class MainActivity extends AppCompatActivity
         WilddogOptions options = new WilddogOptions.Builder().setSyncUrl("https://sosweet.wilddogio.com").build();
         WilddogApp.initializeApp(this, options);
         SyncReference ref = WilddogSync.getInstance().getReference();
-        Banner banner1 = new Banner("lizhaoran","2b");
-        Banner banner2 = new Banner("liz","sosweet");
+        Banner banner1 = new Banner("lizhaoran", "2b");
+        Banner banner2 = new Banner("liz", "sosweet");
         ref.child("banner1").setValue(banner1);
-        Toast.makeText(this,"init WildDog",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "init WildDog", Toast.LENGTH_SHORT).show();
         ref.child("banner1").setValue(banner1);
         ref.child("banner2").setValue(banner2);
+
+        final ImageView heart = (ImageView) findViewById(R.id.heart);
+        heart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+//        intent.putExtra()
+                Intent intent = new Intent(MainActivity.this, DetailActivity.class);
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    startActivity(intent, ActivityOptions.makeSceneTransitionAnimation(MainActivity.this, heart, heart.getTransitionName()).toBundle());
+                }
+
+            }
+        });
+
     }
 
     @Override
