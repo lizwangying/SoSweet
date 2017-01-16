@@ -12,10 +12,34 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.liz.wangying.sosweet.DetailActivity"
     tools:showIn="@layout/activity_detail">
+
     <ImageView
         android:id="@+id/heart"
         android:layout_width="100dp"
         android:layout_height="100dp"
+        android:src="@mipmap/ic_launcher"
         android:transitionName="heart"
-        android:src="@mipmap/ic_launcher"/>
+        android:visibility="invisible" />
+
+    <LinearLayout
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:background="@drawable/shape_rect_corner"
+        android:gravity="center"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <com.github.jorgecastillo.FillableLoader
+            android:id="@+id/fillableLoader"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_gravity="center"
+            app:fl_clippingTransform="plain"
+            app:fl_fillColor="#ffffff"
+            app:fl_originalHeight="540"
+            app:fl_originalWidth="1079"
+            app:fl_strokeColor="#ffffff"
+            app:fl_strokeWidth="1dp" />
+    </LinearLayout>
+
 </RelativeLayout>
