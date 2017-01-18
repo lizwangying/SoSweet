@@ -6,7 +6,7 @@ import android.graphics.PointF;
 import java.text.ParseException;
 
 /**
- * desc://解析path
+ * desc:解析path
  * Created by Liz on 2017/1/13.
  * github: https://github.com/lizwangying
  * 源：https://github.com/romannurik/muzei/blob/master/main/src/main/java/com/google/android/apps/muzei/util/SvgPathParser.java

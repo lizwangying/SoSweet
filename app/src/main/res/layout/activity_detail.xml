@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
+    android:orientation="vertical"
     >
 
     <ImageView
@@ -13,9 +14,74 @@
         android:layout_height="100dp"
         android:src="@mipmap/ic_launcher"
         android:transitionName="heart"
-        android:visibility="invisible" />
-
-    <LinearLayout
+        android:visibility="gone"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="#f8f8f8"
+        android:layout_margin="40dp"
+        android:orientation="horizontal">
+        <com.liz.wangying.sosweet.utils.SVGPathView
+            android:id="@+id/svg_path_view1"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:fillColor="@color/white"
+            app:originalHeight="200"
+            app:originalWidth="200"
+            app:strokeColor="@color/white"
+            app:fillDuration="2000"
+            app:strokeWidth="1dp"
+            app:strokeDrawingDuration="3000"
+            android:background="#f0f0f0"
+            />
+        <com.liz.wangying.sosweet.utils.SVGPathView
+            android:id="@+id/svg_path_view2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            app:fillColor="@color/white"
+            app:originalHeight="100"
+            app:originalWidth="100"
+            app:strokeColor="@color/white"
+            app:fillDuration="2000"
+            app:strokeWidth="1dp"
+            app:strokeDrawingDuration="3000"
+            android:layout_alignParentRight="true"
+            android:background="#f0f0f0"
+            />
+        <com.liz.wangying.sosweet.utils.SVGPathView
+            android:id="@+id/svg_path_view3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:fillColor="@color/white"
+            app:originalHeight="150"
+            app:originalWidth="150"
+            app:strokeColor="@color/white"
+            app:fillDuration="2000"
+            app:strokeWidth="1dp"
+            app:strokeDrawingDuration="3000"
+            android:layout_alignParentBottom="true"
+            android:background="#f0f0f0"
+            />
+        <com.liz.wangying.sosweet.utils.SVGPathView
+            android:id="@+id/svg_path_view4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            app:fillColor="@color/white"
+            app:originalHeight="150"
+            app:originalWidth="150"
+            app:strokeColor="@color/white"
+            app:fillDuration="2000"
+            app:strokeWidth="1dp"
+            app:strokeDrawingDuration="3000"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:background="#f0f0f0"
+            />
+    </RelativeLayout>
+    <FrameLayout
+        android:id="@+id/linear_container"
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:background="@drawable/shape_rect_corner"
@@ -23,18 +89,31 @@
         android:layout_centerInParent="true"
         android:orientation="vertical">
 
+
+        <com.liz.wangying.sosweet.utils.SVGPathView
+            android:id="@+id/svg_path_view"
+            android:layout_width="200dp"
+            android:layout_height="200dp"
+            app:fillColor="@color/white"
+            app:originalHeight="150"
+            app:originalWidth="150"
+            app:strokeColor="@color/white"
+            app:fillDuration="2000"
+            app:strokeWidth="1dp"
+            app:strokeDrawingDuration="3000"
+            />
         <com.github.jorgecastillo.FillableLoader
             android:id="@+id/fillableLoader"
             android:layout_width="185dp"
             android:layout_height="185dp"
             android:layout_gravity="center"
-            app:fl_fillColor="#ffffff"
+            app:fl_fillColor="#ff523c"
             app:fl_originalHeight="185"
-            app:fl_originalWidth="160"
-            app:fl_strokeColor="#ffffff"
+            app:fl_originalWidth="185"
+            app:fl_strokeColor="#ff523c"
             app:fl_clippingTransform="waves"
             app:fl_fillDuration="2000"
-            app:fl_strokeWidth="1dp" />
-    </LinearLayout>
+            app:fl_strokeWidth="2dp" />
+    </FrameLayout>
 
-</RelativeLayout>
+</LinearLayout>
