@@ -57,7 +57,6 @@ public class DetailActivity extends AppCompatActivity implements OnStateChangeLi
 //        ButterKnife.bind(this);
         setContentView(R.layout.activity_detail);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-         fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
 //        setSupportActionBar(toolbar);
 
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
@@ -69,14 +68,15 @@ public class DetailActivity extends AppCompatActivity implements OnStateChangeLi
 //            }
 //        });
 
+        fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
         fillableLoader.setSvgPath(LogoPaths.WONENG_LC_LOGO_PATH);
         fillableLoader.setClippingTransform(new WavesClippingTransform());
         fillableLoader.setOnStateChangeListener(this);
         fillableLoader.start();
 
-        final SVGPathView pathView = (SVGPathView) findViewById(R.id.svg_path_view);
-        pathView.setSvgPath(LogoPaths.WONENG_LC_LOGO_PATH);
-        pathView.start();
+//        final SVGPathView pathView = (SVGPathView) findViewById(R.id.svg_path_view);
+//        pathView.setSvgPath(LogoPaths.WONENG_LC_LOGO_PATH);
+//        pathView.start();
         final SVGPathView pathView1 = (SVGPathView) findViewById(R.id.svg_path_view1);
         pathView1.setSvgPath(LogoPaths.MoneyLogo);
         pathView1.start();

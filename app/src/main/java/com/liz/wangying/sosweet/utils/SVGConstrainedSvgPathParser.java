@@ -19,14 +19,14 @@ public class SVGConstrainedSvgPathParser extends SVGPathParse {
 
     @Override
     protected float transformX(float x) {
-        return x * viewWidth / originalWidth;
-//        return x ;
+//        return x * viewWidth / originalWidth;
+        return x ;
     }
 
     @Override
     protected float transformY(float y) {
-        return y * viewHeight / originalHeight;
-//        return y ;
+//        return y * viewHeight / originalHeight;
+        return y ;
     }
 
     public static class Builder{

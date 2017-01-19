@@ -197,7 +197,6 @@ public class SVGPathView extends View {
         //这个patheffect 只会对STROKE或者FILL_AND_STROKE的paint style产生影响。如果style == FILL它会被忽略掉。
         dashPaint.setPathEffect(getDashPathForDistance(distance));
         canvas.drawPath(pathData.path, dashPaint);
-        float a = dashPaint.getStrokeWidth();
     }
 
     private PathEffect getDashPathForDistance(float distance) {
