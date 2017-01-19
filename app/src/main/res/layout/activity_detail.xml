@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:oak="http://schemas.android.com/apk/res-auto"
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -14,15 +15,14 @@
         android:src="@mipmap/ic_launcher"
         android:transitionName="heart"
         android:visibility="gone" />
-    <!--<RelativeLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="0dp"-->
-        <!--android:layout_weight="1">-->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
             android:background="#f8f8f8"
             android:orientation="horizontal"
             android:padding="40dp">
@@ -78,8 +78,34 @@
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
                 app:strokeWidth="1dp" />
+            <!--<com.liz.wangying.sosweet.utils.SVGPathView-->
+                <!--android:id="@+id/svg_path_view5"-->
+                <!--android:layout_width="130dp"-->
+                <!--android:layout_height="130dp"-->
+                <!--app:fillColor="@color/white"-->
+                <!--app:fillDuration="2000"-->
+                <!--app:originalHeight="400"-->
+                <!--app:originalWidth="400"-->
+                <!--app:strokeColor="@color/white"-->
+                <!--app:strokeDrawingDuration="3000"-->
+                <!--app:strokeWidth="1dp" />-->
+            <oak.svg.AnimatedSvgView
+                android:id="@+id/animated_svg_view"
+                android:layout_centerInParent="true"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_centerHorizontal="true"
+                oak:oakSvgImageSizeX="400"
+                oak:oakSvgImageSizeY="400"
+                oak:oakSvgTraceTime="2000"
+                oak:oakSvgTraceTimePerGlyph="1000"
+                oak:oakSvgFillStart="1200"
+                oak:oakSvgFillTime="1000"/>
         </RelativeLayout>
-<!--    </RelativeLayout>-->
+        <com.liz.wangying.sosweet.view.DashCircleView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </RelativeLayout>
 <!--
     <LinearLayout
         android:layout_width="match_parent"
@@ -108,10 +134,17 @@
         android:orientation="vertical">
 
         <RelativeLayout
+            android:id="@+id/fill_container"
             android:layout_width="62dp"
             android:layout_height="62dp"
-            android:background="@drawable/shape_rect_corner">
-
+            android:visibility="invisible"
+            >
+            <View
+                android:id="@+id/view_icon_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="invisible"
+                android:background="@drawable/shape_rect_corner"/>
             <com.github.jorgecastillo.FillableLoader
                 android:id="@+id/fillableLoader"
                 android:layout_width="62dp"
@@ -128,6 +161,7 @@
         </RelativeLayout>
 
         <TextView
+            android:id="@+id/tv1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -135,14 +169,17 @@
             android:text="我能理财"
             android:textColor="#000"
             android:textSize="22sp"
+            android:visibility="invisible"
             android:textStyle="bold" />
 
         <TextView
+            android:id="@+id/tv2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:text="2016xxxxxxxxx"
             android:textColor="#e3e3e3"
+            android:visibility="invisible"
             android:textSize="12dp" />
     </LinearLayout>
 
