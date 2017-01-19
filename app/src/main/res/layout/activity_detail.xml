@@ -14,10 +14,10 @@
         android:src="@mipmap/ic_launcher"
         android:transitionName="heart"
         android:visibility="gone" />
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
+    <!--<RelativeLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="1">-->
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -29,59 +29,69 @@
 
             <com.liz.wangying.sosweet.utils.SVGPathView
                 android:id="@+id/svg_path_view1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 app:fillColor="@color/white"
                 app:fillDuration="2000"
-                app:originalHeight="555"
-                app:originalWidth="480"
+                app:originalHeight="128"
+                app:originalWidth="128"
                 app:strokeColor="@color/white"
                 app:strokeDrawingDuration="3000"
                 app:strokeWidth="1dp" />
 
             <com.liz.wangying.sosweet.utils.SVGPathView
                 android:id="@+id/svg_path_view2"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_alignParentRight="true"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 app:fillColor="@color/white"
                 app:fillDuration="2000"
-                app:originalHeight="200"
-                app:originalWidth="200"
+                app:originalHeight="128"
+                app:originalWidth="128"
                 app:strokeColor="@color/white"
                 app:strokeDrawingDuration="3000"
+                android:layout_alignParentRight="true"
                 app:strokeWidth="1dp" />
 
             <com.liz.wangying.sosweet.utils.SVGPathView
                 android:id="@+id/svg_path_view3"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_alignParentBottom="true"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 app:fillColor="@color/white"
                 app:fillDuration="2000"
-                app:originalHeight="150"
-                app:originalWidth="150"
+                app:originalHeight="128"
+                app:originalWidth="128"
                 app:strokeColor="@color/white"
                 app:strokeDrawingDuration="3000"
+                android:layout_alignParentBottom="true"
                 app:strokeWidth="1dp" />
 
             <com.liz.wangying.sosweet.utils.SVGPathView
                 android:id="@+id/svg_path_view4"
-                android:layout_width="70dp"
-                android:layout_height="60dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
                 app:fillColor="@color/white"
                 app:fillDuration="2000"
-                app:originalHeight="150"
-                app:originalWidth="150"
+                app:originalHeight="128"
+                app:originalWidth="128"
                 app:strokeColor="@color/white"
                 app:strokeDrawingDuration="3000"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
                 app:strokeWidth="1dp" />
         </RelativeLayout>
-    </RelativeLayout>
+<!--    </RelativeLayout>-->
+<!--
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:background="@color/bg"
+        android:orientation="horizontal">
+        <com.mcxtzhang.pathanimlib.StoreHouseAnimView
+            android:layout_width="70dp"
+            android:layout_height="70dp"
 
-
+            />
+    </LinearLayout>-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="130dp"
