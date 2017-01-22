@@ -1,12 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <declare-styleable name="SVGPathView">
-        <attr name="fillColor" format="color"/>
-        <attr name="strokeColor" format="color"/>
-        <attr name="strokeWidth" format="dimension"/>
-        <attr name="originalWidth" format="integer"/>
-        <attr name="originalHeight" format="integer"/>
-        <attr name="strokeDrawingDuration" format="integer"/>
-        <attr name="fillDuration" format="integer"/>
+        <attr name="fillColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="originalWidth" format="integer" />
+        <attr name="originalHeight" format="integer" />
+        <attr name="strokeDrawingDuration" format="integer" />
+        <attr name="fillDuration" format="integer" />
+    </declare-styleable>
+
+    <declare-styleable name="DashCircleView">
+        <attr name="dashStrokeColor" format="color" />
+        <attr name="dashStrokeWidth" format="dimension" />
+        <attr name="strokeLineWidth" format="dimension" />
+        <attr name="strokeBlankWidth" format="dimension" />
+        <attr name="circleRadius" format="dimension" />
+        <attr name="drawingSpeed" format="integer" />
+        <attr name="ifRepeatDrawing" format="boolean" />
+        <attr name="startAngle" format="integer"/>
     </declare-styleable>
 </resources>

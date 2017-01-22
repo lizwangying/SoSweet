@@ -2,13 +2,13 @@ package com.liz.wangying.sosweet.view;
 
 import android.content.Context;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.DashPathEffect;
 import android.graphics.Paint;
 import android.graphics.PathEffect;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
 
 /**
  * desc:
@@ -17,16 +17,19 @@ import android.view.View;
  */
 
 public class DashCircleView extends View {
+
+    private int strokeColor, strokeWidth, strokeLineWidth, strokeBlankWidth, circleRadius, drawingSpeed, startAngle;
+    private boolean ifRepeatDrawing;
     private Paint mPaint;
-    private int mProgress;
-    /**
-     * 是不是开始绘制下一个圆弧
-     */
+    private RectF oval1;
+    private int mWidth, mHeight, topMargin, bottomMargin, leftMargin, rightMargin;
+    RectF rectF;
+
+    //是不是开始绘制下一个圆弧
     private boolean isNext = false;
-    /**
-     * 圆弧绘制的速度
-     */
-    private int mSpeed=20;
+    //圆弧绘制的速度
+    private int mSpeed = 20;
+
     public DashCircleView(Context context) {
         super(context);
         init();
@@ -35,36 +38,72 @@ public class DashCircleView extends View {
 
     public DashCircleView(Context context, AttributeSet attrs) {
         super(context, attrs);
+        initAttrs(attrs);
         init();
     }
 
     public DashCircleView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+        initAttrs(attrs);
         init();
 
     }
+
+    @Override
+    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
+        super.onSizeChanged(w, h, oldw, oldh);
+        mWidth = w;
+        mHeight = h;
+    }
+
+
+    private void initAttrs(AttributeSet attributeSet) {
+        DashCircleAttrExtractorImpl.Builder builder = new DashCircleAttrExtractorImpl.Builder();
+        DashCircleAttrExtractor extractor = builder.withContext(getContext()).withAttributeSet(attributeSet).build();
+        strokeColor = extractor.getDashStrokeColor();
+        strokeWidth = extractor.getDashStrokeWidth();
+        strokeLineWidth = extractor.getStrokeLineWidth();
+        strokeBlankWidth = extractor.getStrokeBlankWidth();
+        circleRadius = extractor.getCircleRadius();
+        drawingSpeed = extractor.getDrawingSpeed();
+        ifRepeatDrawing = extractor.getIfRepeatDrawing();
+        startAngle = extractor.getStartAngle();
+
+        extractor.recycleAttributes();
+    }
+
+    @Override
+    protected void onLayout(boolean changed, int left, int top, int right, int bottom) {
+        super.onLayout(changed, left, top, right, bottom);
+        ViewGroup.MarginLayoutParams params = (ViewGroup.MarginLayoutParams) getLayoutParams();
+        topMargin = params.topMargin;
+        bottomMargin = params.bottomMargin;
+        leftMargin = params.leftMargin;
+        rightMargin = params.rightMargin;
+    }
+
     private void init() {
         mPaint = new Paint();
         mPaint.setAntiAlias(true);
         mPaint.setStyle(Paint.Style.STROKE);
         mPaint.setAntiAlias(true);
-        mPaint.setStrokeWidth(3);
-        mPaint.setColor(Color.parseColor("#d9d9d9"));
-        PathEffect effects = new DashPathEffect(new float[]{10,10,10,10},1);
+        mPaint.setStrokeWidth(strokeWidth);
+        mPaint.setColor(strokeColor);
+        PathEffect effects = new DashPathEffect(new float[]{strokeLineWidth, strokeBlankWidth}, 1);
         mPaint.setPathEffect(effects);
         //绘图线程
         new Thread() {
             @Override
             public void run() {
                 while (true) {
-                    mProgress++;
-                    if (mProgress == 360) {
-//                        mProgress = 0;
-//                        if (!isNext) {
-//                            isNext = true;
-//                        } else {
-//                            isNext = false;
-//                        }
+                    drawingSpeed++;
+                    if (drawingSpeed == 360 && ifRepeatDrawing) {
+                        drawingSpeed = 0;
+                        if (!isNext) {
+                            isNext = true;
+                        } else {
+                            isNext = false;
+                        }
                         return;
                     }
                     postInvalidate();
@@ -76,6 +115,8 @@ public class DashCircleView extends View {
                 }
             }
         }.start();
+
+        rectF = new RectF(-circleRadius, -circleRadius, circleRadius, circleRadius);
     }
 
     @Override
@@ -83,17 +124,7 @@ public class DashCircleView extends View {
 
         super.onDraw(canvas);
 
-
-        int center = getWidth()/2;
-        int radius = 800;
-        int radius2 = 100;
-        int r = 900;
-
-        RectF oval1 = new RectF(center-radius,center-radius+780,center+radius,center+radius+780);
-        RectF oval2 = new RectF(-550,-450,radius2+550,radius2+450);
-        RectF oval3 = new RectF(-450+r,-450,radius2+450+r,radius2+450);
-        canvas.drawArc(oval1,-180,mProgress,false,mPaint);
-        canvas.drawArc(oval2,-90,mProgress,false,mPaint);
-        canvas.drawArc(oval3,-0,mProgress,false,mPaint);
+        canvas.translate(mWidth / 2 + leftMargin - rightMargin, mHeight / 2 + topMargin - bottomMargin);                  //画布坐标原点移动到中心位置
+        canvas.drawArc(rectF, startAngle, drawingSpeed, false, mPaint);
     }
 }
