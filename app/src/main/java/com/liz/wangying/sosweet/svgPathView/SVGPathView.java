@@ -1,4 +1,4 @@
-package com.liz.wangying.sosweet.utils;
+package com.liz.wangying.sosweet.svgPathView;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -17,6 +17,11 @@ import android.view.animation.Interpolator;
 
 import com.github.jorgecastillo.State;
 import com.github.jorgecastillo.utils.MathUtil;
+import com.liz.wangying.sosweet.svgPathView.attributes.SVGAttributeExtractorImpl;
+import com.liz.wangying.sosweet.svgPathView.svg.SVGConstrainedSvgPathParser;
+import com.liz.wangying.sosweet.svgPathView.svg.SVGPathParse;
+import com.liz.wangying.sosweet.utils.SVGStateChangedListener;
+import com.liz.wangying.sosweet.utils.SVGViewState;
 
 import java.text.ParseException;
 

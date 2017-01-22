@@ -29,7 +29,7 @@
             android:orientation="horizontal"
             android:padding="40dp">
 
-            <com.liz.wangying.sosweet.utils.SVGPathView
+            <com.liz.wangying.sosweet.svgPathView.SVGPathView
                 android:id="@+id/svg_path_view1"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -41,7 +41,7 @@
                 app:strokeDrawingDuration="3000"
                 app:strokeWidth="1dp" />
 
-            <com.liz.wangying.sosweet.utils.SVGPathView
+            <com.liz.wangying.sosweet.svgPathView.SVGPathView
                 android:id="@+id/svg_path_view2"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -54,7 +54,7 @@
                 app:strokeDrawingDuration="3000"
                 app:strokeWidth="1dp" />
 
-            <com.liz.wangying.sosweet.utils.SVGPathView
+            <com.liz.wangying.sosweet.svgPathView.SVGPathView
                 android:id="@+id/svg_path_view3"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -67,7 +67,7 @@
                 app:strokeDrawingDuration="3000"
                 app:strokeWidth="1dp" />
 
-            <com.liz.wangying.sosweet.utils.SVGPathView
+            <com.liz.wangying.sosweet.svgPathView.SVGPathView
                 android:id="@+id/svg_path_view4"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
@@ -80,7 +80,7 @@
                 app:strokeColor="@color/white"
                 app:strokeDrawingDuration="3000"
                 app:strokeWidth="1dp" />
-            <!--<com.liz.wangying.sosweet.utils.SVGPathView-->
+            <!--<com.liz.wangying.sosweet.svgPathView.SVGPathView-->
             <!--android:id="@+id/svg_path_view5"-->
             <!--android:layout_width="130dp"-->
             <!--android:layout_height="130dp"-->

@@ -1,4 +1,4 @@
-package com.liz.wangying.sosweet.utils;
+package com.liz.wangying.sosweet.svgPathView.svg;
 
 import android.graphics.Path;
 import android.graphics.PointF;

@@ -16,10 +16,9 @@ import android.widget.TextView;
 
 import com.github.jorgecastillo.FillableLoader;
 import com.github.jorgecastillo.State;
-import com.github.jorgecastillo.clippingtransforms.WavesClippingTransform;
 import com.github.jorgecastillo.listener.OnStateChangeListener;
 import com.liz.wangying.sosweet.utils.LogoPaths;
-import com.liz.wangying.sosweet.utils.SVGPathView;
+import com.liz.wangying.sosweet.svgPathView.SVGPathView;
 import com.liz.wangying.sosweet.utils.SVGStateChangedListener;
 import com.liz.wangying.sosweet.utils.SVGViewState;
 
@@ -88,7 +87,7 @@ public class DetailActivity extends AppCompatActivity implements OnStateChangeLi
         final RelativeLayout relativeLayout = (RelativeLayout) findViewById(R.id.fill_container);
         fillableLoader = (FillableLoader) findViewById(R.id.fillableLoader);
         fillableLoader.setSvgPath(LogoPaths.WONENG_LC_LOGO_PATH);
-        fillableLoader.setClippingTransform(new WavesClippingTransform());
+//        fillableLoader.setClippingTransform(new WavesClippingTransform());
         fillableLoader.setOnStateChangeListener(this);
 //        fillableLoader.start();
 
