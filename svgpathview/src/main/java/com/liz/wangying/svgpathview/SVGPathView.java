@@ -1,4 +1,4 @@
-package com.liz.wangying.sosweet.svgPathView;
+package com.liz.wangying.svgpathview;
 
 import android.content.Context;
 import android.graphics.Canvas;
@@ -11,17 +11,11 @@ import android.support.v4.view.ViewCompat;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.animation.DecelerateInterpolator;
+import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 
-import com.github.jorgecastillo.State;
-import com.github.jorgecastillo.utils.MathUtil;
-import com.liz.wangying.sosweet.svgPathView.attributes.SVGAttributeExtractorImpl;
-import com.liz.wangying.sosweet.svgPathView.svg.SVGConstrainedSvgPathParser;
-import com.liz.wangying.sosweet.svgPathView.svg.SVGPathParse;
-import com.liz.wangying.sosweet.utils.SVGStateChangedListener;
-import com.liz.wangying.sosweet.utils.SVGViewState;
+import com.liz.wangying.svgpathview.parser.ConstrainedSvgPathParser;
+import com.liz.wangying.svgpathview.parser.SvgPathParser;
 
 import java.text.ParseException;
 
@@ -32,8 +26,12 @@ import java.text.ParseException;
  */
 
 public class SVGPathView extends View {
-    private int strokeColor, fillColor, strokeWidth;
-    private int originalWidth, originalHeight;
+    public static final int NOT_STARTED = 0;
+    public static final int STROKE_STARTED = 1;
+    public static final int FILL_STARTED = 2;
+    public static final int FINISHED = 3;
+    private int strokeColor, fillColor, strokeWidth, traceLineColor;
+    private int originalWidth, originalHeight, traceLineWidth;
     private int strokeDrawingDuration, fillDuration;
     private int drawingState;
     private int viewWidth;
@@ -45,26 +43,6 @@ public class SVGPathView extends View {
     private long initialTime;
     private SVGStateChangedListener stateChangeListener;
 
-    //builder的构造函数
-    SVGPathView(ViewGroup parent, ViewGroup.LayoutParams params, int strokeColor,
-                int strokeWidth, int strokeDrawingDuration, int originalWidth, int originalHeight, String svgPath) {
-        super(parent.getContext());
-
-        this.strokeColor = strokeColor;
-        this.fillColor = fillColor;
-        this.strokeWidth = strokeWidth;
-        this.strokeDrawingDuration = strokeDrawingDuration;
-        this.fillDuration = fillDuration;
-//        this.clippingTransform = transform;
-        this.originalWidth = originalWidth;
-        this.originalHeight = originalHeight;
-        this.svgPath = svgPath;
-//        this.percentageEnabled = percentageEnabled;
-//        this.percentage = fillPercentage;
-
-        init();
-        parent.addView(this, params);
-    }
 
     public SVGPathView(Context context) {
         super(context);
@@ -84,10 +62,10 @@ public class SVGPathView extends View {
     }
 
     private void init() {
-        drawingState = SVGViewState.NOT_STARTED;
+        drawingState = NOT_STARTED;
 
         initDashPaint();
-        animInterpolator = new DecelerateInterpolator();
+        animInterpolator = new AccelerateInterpolator();
         //这个据我所知是为了防止 XFermode 不好使
         setLayerType(LAYER_TYPE_SOFTWARE, null);
     }
@@ -102,6 +80,8 @@ public class SVGPathView extends View {
         originalWidth = extractor.getOriginalWidth();
         strokeDrawingDuration = extractor.getStrokeDrawingDuration();
         fillDuration = extractor.getFillDuration();
+        traceLineColor = extractor.getTraceLineColor();
+        traceLineWidth = extractor.getTraceLineWidth();
 
         extractor.recycleAttributes();
 
@@ -110,9 +90,11 @@ public class SVGPathView extends View {
     private void initDashPaint() {
         dashPaint = new Paint();
         dashPaint.setStyle(Paint.Style.STROKE);
+        dashPaint.setStrokeCap(Paint.Cap.ROUND);
         dashPaint.setAntiAlias(true);
         dashPaint.setStrokeWidth(strokeWidth);
         dashPaint.setColor(strokeColor);
+
     }
 
     private void checkRequirements() {
@@ -140,10 +122,10 @@ public class SVGPathView extends View {
     public void start() {
         checkRequirements();
         initialTime = System.currentTimeMillis();
-        changeState(SVGViewState.STROKE_STARTED);
+        changeState(STROKE_STARTED);
         invalidate();
         //Cause an invalidate to happen on the next animation time step, typically the next display frame.
-        //翻译一下，就是 当下一次动画发生的时候重绘界面，一般事是下一帧的时候
+        //翻译一下，就是 当下一次动画发生的时候重绘界面，一般是下一帧的时候
         ViewCompat.postInvalidateOnAnimation(this);
     }
 
@@ -152,25 +134,21 @@ public class SVGPathView extends View {
      */
     public void reset() {
         initialTime = 0;
-        changeState(SVGViewState.NOT_STARTED);
+        changeState(NOT_STARTED);
         ViewCompat.postInvalidateOnAnimation(this);
     }
 
     /**
      * 改变生命周期并且修改生命周期的listener中的state
      *
-     * @param state
+     * @param SVGViewState
      */
-    private void changeState(int state) {
-        if (drawingState == state) return;
-        drawingState = state;
+    private void changeState(int SVGViewState) {
+        if (drawingState == SVGViewState) return;
+        drawingState = SVGViewState;
         if (stateChangeListener != null) {
-            stateChangeListener.onStateChanged(state);
+            stateChangeListener.onStateChanged(SVGViewState);
         }
-    }
-
-    public void setOnStateChangeListener(SVGStateChangedListener stateChangeListener) {
-        this.stateChangeListener = stateChangeListener;
     }
 
     @Override
@@ -184,22 +162,32 @@ public class SVGPathView extends View {
     @Override
     protected void onDraw(Canvas canvas) {
         super.onDraw(canvas);
-        //判断能不能画，主要是不能再 state 的没开始和 path 为空的时候画
+        //判断能不能画，主要是不能再 SVGViewState 的没开始和 path 为空的时候画
         if (!hasToDraw()) return;
-
         long elapsedTime = System.currentTimeMillis() - initialTime;
         drawStroke(canvas, elapsedTime);
         if (hasToKeepDrawing(elapsedTime)) {
             ViewCompat.postInvalidateOnAnimation(this);
         } else {
-            changeState(State.FINISHED);
+            changeState(FINISHED);
         }
     }
 
+    public boolean hasToDraw() {
+        return !(drawingState == NOT_STARTED || pathData == null);
+    }
+
+    //这个patheffect 只会对STROKE或者FILL_AND_STROKE的paint style产生影响。如果style == FILL它会被忽略掉。
     private void drawStroke(Canvas canvas, long elapsedTime) {
-        float phase = MathUtil.constrain(0, 1, elapsedTime * 1f / strokeDrawingDuration);
+        float phase = constrain(0, 1, elapsedTime * 1f / strokeDrawingDuration);
         float distance = animInterpolator.getInterpolation(phase) * pathData.length;
-        //这个patheffect 只会对STROKE或者FILL_AND_STROKE的paint style产生影响。如果style == FILL它会被忽略掉。
+
+        if (traceLineWidth > 0) {
+            dashPaint.setColor(traceLineColor);
+            dashPaint.setPathEffect(new DashPathEffect(new float[]{0, distance, phase > 0 ? traceLineWidth : 0, pathData.length}, 0));
+            canvas.drawPath(pathData.path, dashPaint);
+        }
+        dashPaint.setColor(strokeColor);
         dashPaint.setPathEffect(getDashPathForDistance(distance));
         canvas.drawPath(pathData.path, dashPaint);
     }
@@ -209,7 +197,7 @@ public class SVGPathView extends View {
     }
 
     private void buildPathData() {
-        SVGPathParse parser = getPathParser();
+        SvgPathParser parser = getPathParser();
         pathData = new SVGPathData();
         if (!TextUtils.isEmpty(svgPath)) {
             try {
@@ -217,7 +205,7 @@ public class SVGPathView extends View {
             } catch (ParseException e) {
                 pathData.path = new Path();
             }
-        }else {
+        } else {
             throw new IllegalArgumentException("嘿，兄弟，你必须提供一个 svg path 我才能画好么");
 
 
@@ -244,22 +232,21 @@ public class SVGPathView extends View {
     }
 
     /**
-     * 控制画，还是不画
+     * 判断有没有画完
      *
+     * @param elapsedTime
      * @return
      */
-    public boolean hasToDraw() {
-        return !(drawingState == State.NOT_STARTED || pathData == null);
-    }
     private boolean hasToKeepDrawing(long elapsedTime) {
 //        if (percentageEnabled) {
 //            return previousFramePercentage < 100;
 //        } else {
-            return elapsedTime < strokeDrawingDuration + fillDuration;
+        return elapsedTime < strokeDrawingDuration + fillDuration;
 //        }
     }
-    private SVGPathParse getPathParser(){
-        SVGConstrainedSvgPathParser.Builder builder = new SVGConstrainedSvgPathParser.Builder();
+
+    private SvgPathParser getPathParser() {
+        ConstrainedSvgPathParser.Builder builder = new ConstrainedSvgPathParser.Builder();
         return builder.originalWidth(originalWidth)
                 .originalHeight(originalHeight)
                 .viewWidth(viewWidth)
@@ -267,4 +254,20 @@ public class SVGPathView extends View {
                 .build();
     }
 
+    public float constrain(float min, float max, float v) {
+        return Math.max(min, Math.min(max, v));
+    }
+
+    public interface SVGStateChangedListener {
+        void onStateChanged(int state);
+    }
+
+    public void setOnStateChangeListener(SVGStateChangedListener stateChangeListener) {
+        this.stateChangeListener = stateChangeListener;
+    }
+
+    class SVGPathData {
+        Path path;
+        float length;
+    }
 }

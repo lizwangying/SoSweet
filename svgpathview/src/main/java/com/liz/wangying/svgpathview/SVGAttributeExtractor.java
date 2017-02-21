@@ -1,4 +1,4 @@
-package com.liz.wangying.sosweet.svgPathView.attributes;
+package com.liz.wangying.svgpathview;
 
 /**
  * desc:
@@ -20,6 +20,10 @@ public interface SVGAttributeExtractor {
     int getStrokeDrawingDuration();
 
     int getFillDuration();
+
+    int getTraceLineColor();
+
+    int getTraceLineWidth();
 
     //    Clip
     void recycleAttributes();

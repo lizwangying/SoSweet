@@ -1,12 +1,9 @@
-package com.liz.wangying.sosweet.svgPathView.attributes;
+package com.liz.wangying.svgpathview;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.graphics.Color;
 import android.util.AttributeSet;
-
-import com.github.jorgecastillo.clippingtransforms.TransformAbstractFactory;
-import com.github.jorgecastillo.clippingtransforms.TransformFactoryImpl;
-import com.liz.wangying.sosweet.R;
 
 import java.lang.ref.WeakReference;
 
@@ -20,10 +17,8 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
     private WeakReference<Context> weakContext;
     private WeakReference<AttributeSet> weakAttrs;
     private WeakReference<TypedArray> weakAttributeArray;
-    private TransformAbstractFactory transformFactory;
 
     public SVGAttributeExtractorImpl(WeakReference<Context> weakContext, WeakReference<AttributeSet> weakAttrs) {
-        transformFactory = new TransformFactoryImpl();
         this.weakContext = weakContext;
         this.weakAttrs = weakAttrs;
     }
@@ -43,13 +38,13 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
     @Override
     public int getStrokeColor() {
         return attributeArray().getColor(R.styleable.SVGPathView_strokeColor
-                , context().getResources().getColor(R.color.white));
+                , Color.BLACK);
     }
 
     @Override
     public int getFillColor() {
         return attributeArray().getColor(R.styleable.SVGPathView_fillColor
-        ,context().getResources().getColor(R.color.white));
+        ,Color.BLUE);
     }
 
     @Override
@@ -66,20 +61,30 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
 
     @Override
     public int getOriginalHeight() {
-        return attributeArray().getInteger(R.styleable.FillableLoader_fl_originalHeight
+        return attributeArray().getInteger(R.styleable.SVGPathView_originalHeight
         , -1);
     }
 
     @Override
     public int getStrokeDrawingDuration() {
         return attributeArray().getInteger(R.styleable.SVGPathView_strokeDrawingDuration
-        ,1000);
+        ,2000);
     }
 
     @Override
     public int getFillDuration() {
         return attributeArray().getInteger(R.styleable.SVGPathView_fillDuration
-        ,2000);
+        ,0);
+    }
+
+    @Override
+    public int getTraceLineColor() {
+        return attributeArray().getColor(R.styleable.SVGPathView_traceLineColor, Color.BLACK);
+    }
+
+    @Override
+    public int getTraceLineWidth() {
+        return attributeArray().getDimensionPixelSize(R.styleable.SVGPathView_traceLineWidth,0);
     }
 
     @Override

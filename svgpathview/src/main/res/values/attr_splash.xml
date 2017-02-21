@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SVGPathView">
+        <attr name="fillColor" format="color" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="originalWidth" format="integer" />
+        <attr name="originalHeight" format="integer" />
+        <attr name="strokeDrawingDuration" format="integer" />
+        <attr name="fillDuration" format="integer" />
+        <attr name="traceLineColor" format="color"/>
+        <attr name="traceLineWidth" format="dimension"/>
+    </declare-styleable>
+</resources>
