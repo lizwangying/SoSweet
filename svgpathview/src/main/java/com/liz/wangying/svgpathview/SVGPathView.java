@@ -14,6 +14,8 @@ import android.view.View;
 import android.view.animation.AccelerateInterpolator;
 import android.view.animation.Interpolator;
 
+import com.liz.wangying.svgpathview.attributes.SVGAttributeExtractorImpl;
+import com.liz.wangying.svgpathview.clippingtransforms.ClippingTransform;
 import com.liz.wangying.svgpathview.parser.ConstrainedSvgPathParser;
 import com.liz.wangying.svgpathview.parser.SvgPathParser;
 
@@ -37,12 +39,33 @@ public class SVGPathView extends View {
     private int viewWidth;
     private int viewHeight;
     private String svgPath;// svg 的 path 哦
-    private Paint dashPaint;
+    private Paint dashPaint, fillPaint;
     private Interpolator animInterpolator;
     private SVGPathData pathData;
-    private long initialTime;
+    private long initialTime;//初始化时间
     private SVGStateChangedListener stateChangeListener;
 
+    private ClippingTransform clippingTransform;
+    /**
+     * Whether the percentage mode is enabled or not. When the percentage mode is enabled then the
+     * filling animation will cover part of the loader, up to the {@link #percentage} value.
+     */
+    private boolean percentageEnabled;
+
+    /**
+     * The percentage that this view should load up to.
+     */
+    private float percentage;
+
+    /**
+     * The percentage that the previous {@link #onDraw(Canvas)} displayed on the screen.
+     */
+    private float previousFramePercentage;
+
+    /**
+     * The time in millis when the {@link #previousFramePercentage} was displayed on the screen.
+     */
+    private long previousFramePercentageTime;
 
     public SVGPathView(Context context) {
         super(context);
@@ -65,6 +88,7 @@ public class SVGPathView extends View {
         drawingState = NOT_STARTED;
 
         initDashPaint();
+        initFillPaint();
         animInterpolator = new AccelerateInterpolator();
         //这个据我所知是为了防止 XFermode 不好使
         setLayerType(LAYER_TYPE_SOFTWARE, null);
@@ -82,6 +106,11 @@ public class SVGPathView extends View {
         fillDuration = extractor.getFillDuration();
         traceLineColor = extractor.getTraceLineColor();
         traceLineWidth = extractor.getTraceLineWidth();
+        clippingTransform = extractor.getClippingTransform();
+        percentage = extractor.getFillPercentage();
+        if (percentage != 100) {
+            percentageEnabled = true;
+        }
 
         extractor.recycleAttributes();
 
@@ -95,6 +124,13 @@ public class SVGPathView extends View {
         dashPaint.setStrokeWidth(strokeWidth);
         dashPaint.setColor(strokeColor);
 
+    }
+
+    private void initFillPaint() {
+        fillPaint = new Paint();
+        fillPaint.setAntiAlias(true);
+        fillPaint.setStyle(Paint.Style.FILL);
+        fillPaint.setColor(fillColor);
     }
 
     private void checkRequirements() {
@@ -165,12 +201,47 @@ public class SVGPathView extends View {
         //判断能不能画，主要是不能再 SVGViewState 的没开始和 path 为空的时候画
         if (!hasToDraw()) return;
         long elapsedTime = System.currentTimeMillis() - initialTime;
+        //开始画轮廓
         drawStroke(canvas, elapsedTime);
+        //开始画填充内容
+        drawFill(canvas,elapsedTime);
+
         if (hasToKeepDrawing(elapsedTime)) {
             ViewCompat.postInvalidateOnAnimation(this);
         } else {
             changeState(FINISHED);
         }
+    }
+
+    private void drawFill(Canvas canvas, long elapsedTime) {
+        // 开始画填充内容
+        if (isStrokeTotallyDrawn(elapsedTime)) {
+            if (drawingState < FILL_STARTED) {
+                changeState(FILL_STARTED);
+                previousFramePercentageTime = System.currentTimeMillis() - initialTime;
+            }
+            float fillPhase;
+            if (percentageEnabled) {
+                fillPhase = getFillPhaseForPercentage(elapsedTime);
+            } else {
+                fillPhase = getFillPhaseWithoutPercentage(elapsedTime);
+            }
+            clippingTransform.transform(canvas, fillPhase, this);//裁剪画布大小，为轮廓和你自定义的波形重合的部分
+            canvas.drawPath(pathData.path, fillPaint);//画出来的直接就是svg的轮廓，实心的。。。
+        }
+    }
+
+    private float getFillPhaseForPercentage(long elapsedTime) {
+        float fillPhase = constrain(0, percentage / 100,
+                previousFramePercentage / 100 + ((float) (elapsedTime - previousFramePercentageTime)
+                        / fillDuration));
+        previousFramePercentage = fillPhase * 100;
+        previousFramePercentageTime = System.currentTimeMillis() - initialTime;
+        return fillPhase;
+    }
+
+    private float getFillPhaseWithoutPercentage(long elapsedTime) {
+        return constrain(0, 1, (float) (elapsedTime - strokeDrawingDuration) / fillDuration);
     }
 
     public boolean hasToDraw() {
@@ -190,6 +261,10 @@ public class SVGPathView extends View {
         dashPaint.setColor(strokeColor);
         dashPaint.setPathEffect(getDashPathForDistance(distance));
         canvas.drawPath(pathData.path, dashPaint);
+    }
+
+    public boolean isStrokeTotallyDrawn(long elapsedTime) {
+        return elapsedTime > strokeDrawingDuration;
     }
 
     private PathEffect getDashPathForDistance(float distance) {
@@ -254,6 +329,13 @@ public class SVGPathView extends View {
                 .build();
     }
 
+    /**
+     * 获得取值范围在 min 和 max 之间的值
+     * @param min 最小值
+     * @param max 最大值
+     * @param v 变量
+     * @return 满足条件的值
+     */
     public float constrain(float min, float max, float v) {
         return Math.max(min, Math.min(max, v));
     }
@@ -270,4 +352,6 @@ public class SVGPathView extends View {
         Path path;
         float length;
     }
+
+
 }

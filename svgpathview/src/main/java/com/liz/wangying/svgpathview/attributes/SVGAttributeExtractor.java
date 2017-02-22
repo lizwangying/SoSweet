@@ -1,4 +1,6 @@
-package com.liz.wangying.svgpathview;
+package com.liz.wangying.svgpathview.attributes;
+
+import com.liz.wangying.svgpathview.clippingtransforms.ClippingTransform;
 
 /**
  * desc:
@@ -25,7 +27,10 @@ public interface SVGAttributeExtractor {
 
     int getTraceLineWidth();
 
-    //    Clip
+    ClippingTransform getClippingTransform();
+
+    int getFillPercentage();
+
     void recycleAttributes();
 
     void release();

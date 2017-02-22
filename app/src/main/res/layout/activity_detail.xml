@@ -1,209 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:dashCircle="http://schemas.android.com/apk/res-auto"
-    xmlns:oak="http://schemas.android.com/apk/res-auto"
     android:id="@+id/details_container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#fff"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/heart"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:src="@mipmap/ic_launcher"
-        android:transitionName="heart"
-        android:visibility="gone" />
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#f8f8f8"
-            android:orientation="horizontal"
-            android:padding="40dp">
-
-            <com.liz.wangying.sosweet.svgPathView.SVGPathView
-                android:id="@+id/svg_path_view1"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                app:fillColor="@color/white"
-                app:fillDuration="2000"
-                app:originalHeight="128"
-                app:originalWidth="128"
-                app:strokeColor="@color/white"
-                app:strokeDrawingDuration="3000"
-                app:strokeWidth="1dp" />
-
-            <com.liz.wangying.sosweet.svgPathView.SVGPathView
-                android:id="@+id/svg_path_view2"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_alignParentRight="true"
-                app:fillColor="@color/white"
-                app:fillDuration="2000"
-                app:originalHeight="128"
-                app:originalWidth="128"
-                app:strokeColor="@color/white"
-                app:strokeDrawingDuration="3000"
-                app:strokeWidth="1dp" />
-
-            <com.liz.wangying.sosweet.svgPathView.SVGPathView
-                android:id="@+id/svg_path_view3"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_alignParentBottom="true"
-                app:fillColor="@color/white"
-                app:fillDuration="2000"
-                app:originalHeight="128"
-                app:originalWidth="128"
-                app:strokeColor="@color/white"
-                app:strokeDrawingDuration="3000"
-                app:strokeWidth="1dp" />
-
-            <com.liz.wangying.sosweet.svgPathView.SVGPathView
-                android:id="@+id/svg_path_view4"
-                android:layout_width="42dp"
-                android:layout_height="42dp"
-                android:layout_alignParentBottom="true"
-                android:layout_alignParentRight="true"
-                app:fillColor="@color/white"
-                app:fillDuration="2000"
-                app:originalHeight="128"
-                app:originalWidth="128"
-                app:strokeColor="@color/white"
-                app:strokeDrawingDuration="3000"
-                app:strokeWidth="1dp" />
-            <!--<com.liz.wangying.sosweet.svgPathView.SVGPathView-->
-            <!--android:id="@+id/svg_path_view5"-->
-            <!--android:layout_width="130dp"-->
-            <!--android:layout_height="130dp"-->
-            <!--app:fillColor="@color/white"-->
-            <!--app:fillDuration="2000"-->
-            <!--app:originalHeight="400"-->
-            <!--app:originalWidth="400"-->
-            <!--app:strokeColor="@color/white"-->
-            <!--app:strokeDrawingDuration="3000"-->
-            <!--app:strokeWidth="1dp" />-->
-            <oak.svg.AnimatedSvgView
-                android:id="@+id/animated_svg_view"
-                android:layout_width="130dp"
-                android:layout_height="130dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerInParent="true"
-                oak:oakSvgFillStart="1200"
-                oak:oakSvgFillTime="1000"
-                oak:oakSvgImageSizeX="400"
-                oak:oakSvgImageSizeY="400"
-                oak:oakSvgTraceTime="2000"
-                oak:oakSvgTraceTimePerGlyph="1000" />
-        </RelativeLayout>
-
-        <com.liz.wangying.sosweet.view.DashCircleView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="190dp"
-            dashCircle:circleRadius="255dp"
-            dashCircle:dashStrokeColor="#d9d9d9"
-            dashCircle:dashStrokeWidth="1dp"
-            dashCircle:drawingSpeed="15"
-            dashCircle:startAngle="-180" />
-
-        <com.liz.wangying.sosweet.view.DashCircleView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="100dp"
-            android:layout_marginRight="100dp"
-            dashCircle:circleRadius="170dp"
-            dashCircle:dashStrokeColor="#d9d9d9"
-            dashCircle:dashStrokeWidth="1dp"
-            dashCircle:drawingSpeed="15"
-            dashCircle:startAngle="-90" />
-
-        <com.liz.wangying.sosweet.view.DashCircleView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="100dp"
-            android:layout_marginLeft="100dp"
-            dashCircle:circleRadius="170dp"
-            dashCircle:dashStrokeColor="#d9d9d9"
-            dashCircle:dashStrokeWidth="1dp"
-            dashCircle:drawingSpeed="15"
-            dashCircle:startAngle="0" />
-    </RelativeLayout>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/bg"
-        android:gravity="center"
-        android:paddingBottom="30dp"
-        android:paddingTop="20dp"
-        android:text="我能理财，一键式理财APP"
-        android:textColor="#555"
-        android:textSize="26sp" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:gravity="center"
-        android:orientation="vertical">
-
-        <RelativeLayout
-            android:id="@+id/fill_container"
-            android:layout_width="62dp"
-            android:layout_height="62dp"
-            android:visibility="invisible">
-
-            <View
-                android:id="@+id/view_icon_bg"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/shape_rect_corner"
-                android:visibility="invisible" />
-
-            <com.github.jorgecastillo.FillableLoader
-                android:id="@+id/fillableLoader"
-                android:layout_width="62dp"
-                android:layout_height="62dp"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_rect_corner2"
-                app:fl_clippingTransform="waves"
-                app:fl_fillColor="#fff"
-                app:fl_fillDuration="2000"
-                app:fl_originalHeight="512"
-                app:fl_originalWidth="512"
-                app:fl_strokeColor="#fff"
-                app:fl_strokeWidth="1dp" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:text="我能理财"
-            android:textColor="#000"
-            android:textSize="22sp"
-            android:textStyle="bold"
-            android:visibility="invisible" />
-
-        <TextView
-            android:id="@+id/tv2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="2016xxxxxxxxx"
-            android:textColor="#e3e3e3"
-            android:textSize="12dp"
-            android:visibility="invisible" />
-    </LinearLayout>
-
+    <com.liz.wangying.svgpathview.SVGPathView
+        android:id="@+id/svg_path_view"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_gravity="center"
+        app:fillColor="#ff523c"
+        app:fillDuration="2000"
+        app:originalHeight="208"
+        app:originalWidth="208"
+        app:strokeColor="@color/white"
+        app:strokeDrawingDuration="3000"
+        app:strokeWidth="1dp"
+        />
 </LinearLayout>

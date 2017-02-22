@@ -1,9 +1,14 @@
-package com.liz.wangying.svgpathview;
+package com.liz.wangying.svgpathview.attributes;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
+
+import com.liz.wangying.svgpathview.R;
+import com.liz.wangying.svgpathview.clippingtransforms.ClippingTransform;
+import com.liz.wangying.svgpathview.clippingtransforms.TransformFactory;
+import com.liz.wangying.svgpathview.clippingtransforms.TransformFactoryImpl;
 
 import java.lang.ref.WeakReference;
 
@@ -17,10 +22,12 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
     private WeakReference<Context> weakContext;
     private WeakReference<AttributeSet> weakAttrs;
     private WeakReference<TypedArray> weakAttributeArray;
+    private TransformFactory transformFactory;
 
     public SVGAttributeExtractorImpl(WeakReference<Context> weakContext, WeakReference<AttributeSet> weakAttrs) {
         this.weakContext = weakContext;
         this.weakAttrs = weakAttrs;
+        this.transformFactory = new TransformFactoryImpl();
     }
 
     private Context context() {
@@ -85,6 +92,18 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
     @Override
     public int getTraceLineWidth() {
         return attributeArray().getDimensionPixelSize(R.styleable.SVGPathView_traceLineWidth,0);
+    }
+
+    @Override
+    public ClippingTransform getClippingTransform() {
+        int value = attributeArray().getInteger(R.styleable.SVGPathView_clippingTransform,0);
+        return transformFactory.getClippingTransform(value);
+    }
+
+    //默认百分百
+    @Override
+    public int getFillPercentage() {
+        return attributeArray().getInteger(R.styleable.SVGPathView_fillPercentage,100);
     }
 
     @Override

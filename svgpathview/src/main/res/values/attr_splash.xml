@@ -10,5 +10,10 @@
         <attr name="fillDuration" format="integer" />
         <attr name="traceLineColor" format="color"/>
         <attr name="traceLineWidth" format="dimension"/>
+        <attr name="fillPercentage" format="integer"/>
+        <attr name="clippingTransform" format="enum">
+            <enum name="plain" value="0"/>
+            <enum name="waves" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>

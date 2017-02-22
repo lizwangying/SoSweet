@@ -1,13 +1,9 @@
-package com.fxiaodi.and;
+package com.liz.wangying.sosweet;
 
 import android.app.Activity;
 import android.app.Application;
-import android.content.Context;
 
-import com.liz.wangying.sosweet.CrashHandler;
 import com.liz.wangying.sosweet.data.ConstantData;
-import com.liz.wangying.sosweet.data.Constants;
-import com.liz.wangying.sosweet.utils.PackageUtils;
 
 import java.util.LinkedList;
 import java.util.List;
