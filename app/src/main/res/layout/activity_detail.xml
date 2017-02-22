@@ -12,8 +12,6 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_gravity="center"
-        app:fillColor="#ff523c"
-        app:fillDuration="2000"
         app:originalHeight="208"
         app:originalWidth="208"
         app:strokeColor="@color/white"

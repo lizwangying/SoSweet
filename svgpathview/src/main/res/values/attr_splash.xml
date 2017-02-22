@@ -15,5 +15,6 @@
             <enum name="plain" value="0"/>
             <enum name="waves" value="1"/>
         </attr>
+        <attr name="needFillProgress" format="boolean"/>
     </declare-styleable>
 </resources>

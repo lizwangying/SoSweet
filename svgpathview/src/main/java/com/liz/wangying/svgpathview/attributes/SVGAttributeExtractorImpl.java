@@ -107,6 +107,11 @@ public class SVGAttributeExtractorImpl implements SVGAttributeExtractor {
     }
 
     @Override
+    public boolean getNeedFillProgress() {
+        return attributeArray().getBoolean(R.styleable.SVGPathView_needFillProgress,false);
+    }
+
+    @Override
     public void recycleAttributes() {
         if (weakAttributeArray != null){
             weakAttributeArray.get().recycle();

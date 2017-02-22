@@ -44,7 +44,7 @@ public class SVGPathView extends View {
     private SVGPathData pathData;
     private long initialTime;//初始化时间
     private SVGStateChangedListener stateChangeListener;
-
+    private boolean ifFill;
     private ClippingTransform clippingTransform;
     /**
      * Whether the percentage mode is enabled or not. When the percentage mode is enabled then the
@@ -111,6 +111,7 @@ public class SVGPathView extends View {
         if (percentage != 100) {
             percentageEnabled = true;
         }
+        ifFill = extractor.getNeedFillProgress();
 
         extractor.recycleAttributes();
 
@@ -204,8 +205,9 @@ public class SVGPathView extends View {
         //开始画轮廓
         drawStroke(canvas, elapsedTime);
         //开始画填充内容
-        drawFill(canvas,elapsedTime);
-
+        if (ifFill) {
+            drawFill(canvas, elapsedTime);
+        }
         if (hasToKeepDrawing(elapsedTime)) {
             ViewCompat.postInvalidateOnAnimation(this);
         } else {

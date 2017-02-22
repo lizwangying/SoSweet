@@ -31,6 +31,8 @@ public interface SVGAttributeExtractor {
 
     int getFillPercentage();
 
+    boolean getNeedFillProgress();
+
     void recycleAttributes();
 
     void release();
