@@ -3,8 +3,13 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
-    <color name="love">#ff004c</color>
-    <color name="love1">#E91E63</color>
+    <color name="love">#FD004C</color>
+    <color name="loveDark">#E9004C</color>
+    <color name="loveA400">#F50057</color>
+    <color name="loveA700">#C51162</color>
+    <color name="loveA200">#FF4081</color>
+    <color name="loveA500">#E91E63</color>
+    <color name="loveAccent">#da0361</color>
     <color name="love2">#C2185B</color>
     <color name="love3">#D81B60</color>
     <color name="love4">#EC407A</color>
@@ -19,4 +24,11 @@
 
     <color name="niceBlack">#616161</color>
     <color name="niceBlackDark">#424242</color>
+
+    <color name="yellowPrimary400">#FFEA00</color>
+    <color name="yellowA700">#FFD600</color>
+    <color name="yellowA500">#FFEB3B</color>
+    <color name="yellowA200">#FFFF00</color>
+    <color name="yellowA100">#FFFF8D</color>
+    <color name="yellow">#fbc611</color>
 </resources>

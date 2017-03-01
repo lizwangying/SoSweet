@@ -3,12 +3,13 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/niceBlack</item>
-        <item name="colorPrimaryDark">@color/niceBlackDark</item>
+        <item name="colorPrimary">@color/love</item>
+        <item name="colorPrimaryDark">@color/loveDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <!--Enable window content transition-->
         <item name="android:windowContentTransitions" tools:targetApi="lollipop">true</item>
         <item name="android:windowActivityTransitions" tools:targetApi="lollipop">true</item>
+
     </style>
 
     <style name="AppTheme.NoActionBar">
