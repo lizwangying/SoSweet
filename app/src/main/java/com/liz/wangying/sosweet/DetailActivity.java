@@ -3,10 +3,6 @@ package com.liz.wangying.sosweet;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import com.github.jorgecastillo.listener.OnStateChangeListener;
-import com.liz.wangying.sosweet.utils.LogoPaths;
-import com.liz.wangying.svgpathview.SVGPathView;
-
 /**
  * .,:,,,                                        .::,,,::.
  * .::::,,;;,                                  .,;;:,,....:i:
@@ -45,21 +41,19 @@ import com.liz.wangying.svgpathview.SVGPathView;
  * ..:isssssrrii;::::::;;iirsssssr;:..
  * .,::iiirsssssssssrri;;:.
  */
-public class DetailActivity extends AppCompatActivity implements OnStateChangeListener{
+public class DetailActivity extends AppCompatActivity  {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
 
-        SVGPathView svgPathView = (SVGPathView) findViewById(R.id.svg_path_view);
-        svgPathView.setSvgPath(LogoPaths.HEART);
-        svgPathView.start();
+//        SVGPathView svgPathView = (SVGPathView) findViewById(R.id.svg_path_view);
+//        svgPathView.setSvgPath(LogoPaths.HEART);
+//        svgPathView.start();
     }
 
-    @Override
-    public void onStateChange(int state) {
-    }
+
 
 
 }

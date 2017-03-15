@@ -5,7 +5,6 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.util.AttributeSet;
 
-import com.github.jorgecastillo.clippingtransforms.TransformAbstractFactory;
 import com.liz.wangying.sosweet.R;
 
 import java.lang.ref.WeakReference;
@@ -17,7 +16,6 @@ import java.lang.ref.WeakReference;
  */
 
 public class DashCircleAttrExtractorImpl implements DashCircleAttrExtractor {
-    private TransformAbstractFactory transformFactory;
     private WeakReference<Context> weakContext;
     private WeakReference<AttributeSet> weakAttrs;
     private WeakReference<TypedArray> weakAttributeArray;
