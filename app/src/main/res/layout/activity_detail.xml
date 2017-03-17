@@ -1,21 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/details_container"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#fff"
-    android:orientation="vertical">
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <com.liz.wangying.svgpathview.SVGPathView
-        android:id="@+id/svg_path_view"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        app:originalHeight="208"
-        app:originalWidth="208"
-        app:strokeColor="@color/white"
-        app:strokeDrawingDuration="3000"
-        app:strokeWidth="1dp"
-        />
-</LinearLayout>
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/web_root"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <WebView
+            android:id="@+id/webview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none" />
+    </LinearLayout>
+</layout>

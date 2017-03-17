@@ -35,6 +35,7 @@ public class DashCircleAttrExtractorImpl implements DashCircleAttrExtractor {
                     , R.styleable.DashCircleView, 0, 0));
         }
         return weakAttributeArray.get();
+
     }
 
     @Override

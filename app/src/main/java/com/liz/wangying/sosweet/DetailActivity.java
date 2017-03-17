@@ -1,7 +1,21 @@
 package com.liz.wangying.sosweet;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
+import android.databinding.DataBindingUtil;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
+import android.webkit.JavascriptInterface;
+import android.webkit.WebChromeClient;
+import android.webkit.WebResourceRequest;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
+
+import com.liz.wangying.sosweet.databinding.ActivityDetailBinding;
+import com.liz.wangying.sosweet.web.MyWebChormeClient;
 
 /**
  * .,:,,,                                        .::,,,::.
@@ -41,19 +55,62 @@ import android.support.v7.app.AppCompatActivity;
  * ..:isssssrrii;::::::;;iirsssssr;:..
  * .,::iiirsssssssssrri;;:.
  */
-public class DetailActivity extends AppCompatActivity  {
+public class DetailActivity extends AppCompatActivity {
+    ActivityDetailBinding binding;
 
+    @SuppressLint({"SetJavaScriptEnabled", "JavascriptInterface"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
+        WebSettings webSettings = binding.webview.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        webSettings.setDefaultTextEncodingName("UTF-8");
+        binding.webview.loadUrl("file:///android_asset/hello.html");
+        binding.webview.setWebChromeClient(new MyWebChormeClient());
+        binding.webview.addJavascriptInterface(new JSHook(), "hello");
 
-//        SVGPathView svgPathView = (SVGPathView) findViewById(R.id.svg_path_view);
+
+//        SVGPathView svgPathViTew = (SVGPathView) findViewById(R.id.svg_path_view);
 //        svgPathView.setSvgPath(LogoPaths.HEART);
 //        svgPathView.start();
     }
 
+    public class JSHook {
+        @JavascriptInterface
+        public void javaMethod(String p) {
+            Log.d("aaa", "Jshook.javaMethod() called -->" + p);
 
+        }
+
+        @JavascriptInterface
+        public void showAndroid() {
+            final String info = "来自手机的内容啊";
+            binding.webview.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.webview.loadUrl("javascript:show('" + info + "')");
+//                    binding.webview.loadUrl("javascript:showAlert()");
+                }
+            });
+        }
+
+        @JavascriptInterface
+        public String getInfo() {
+            return "获取手机内的信息";
+        }
+
+        @JavascriptInterface
+        public void showAlert(){
+            binding.webview.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.webview.loadUrl("javascript:showAlert()");
+                }
+            });
+            Log.d("aaa", "这里应该有个弹窗");
+        }
+    }
 
 
 }
