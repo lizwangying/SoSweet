@@ -1,21 +1,10 @@
 package com.liz.wangying.sosweet;
 
-import android.annotation.SuppressLint;
-import android.annotation.TargetApi;
 import android.databinding.DataBindingUtil;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
-import android.webkit.JavascriptInterface;
-import android.webkit.WebChromeClient;
-import android.webkit.WebResourceRequest;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
 
 import com.liz.wangying.sosweet.databinding.ActivityDetailBinding;
-import com.liz.wangying.sosweet.web.MyWebChormeClient;
 
 /**
  * .,:,,,                                        .::,,,::.
@@ -62,8 +51,21 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-    }
 
+        binding.autoSplitTv.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.autoSplitTv.setText(binding.autoSplitTv.autoSplitText(binding.autoSplitTv, "第一步、"));
+            }
+        });
+        binding.autoSplitTv2.post(new Runnable() {
+            @Override
+            public void run() {
+                binding.autoSplitTv2.setText(binding.autoSplitTv.autoSplitText(binding.autoSplitTv2, "1："));
+            }
+        });
+
+    }
 
 
 }

@@ -11,10 +11,26 @@
         android:fitsSystemWindows="true"
         android:orientation="vertical">
 
-        <WebView
-            android:id="@+id/webview"
+        <com.liz.wangying.sosweet.view.AutoSplitTextView
+            android:id="@+id/auto_split_tv"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="none" />
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/process"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:layout_marginTop="20dp"
+            />
+
+        <com.liz.wangying.sosweet.view.AutoSplitTextView
+            android:id="@+id/auto_split_tv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:text="@string/process2"
+            android:paddingRight="16dp"
+            android:paddingLeft="16dp"
+            android:layout_marginTop="20dp"
+            />
     </LinearLayout>
 </layout>

@@ -6,4 +6,16 @@
 
     <string name="action_settings">Settings</string>
     <string name="title_activity_detail">DetailActivity</string>
+    <string name="process">把一只长颈鹿放进冰箱要几步？ \n把长颈鹿放到冰箱里\n
+第一步：把冰箱门打开,瞅瞅有啥好吃的没，有，先吃光再说，昨晚的剩面条先吃了，前天的炸鸡排也赶紧吃了\n
+第二步：把长颈鹿放进去，如果反抗，可以考虑里面放点好吃的引诱进去\n
+第三步：把门关上\n</string>
+    <string name="process2">把大象放到冰箱里\n
+1：把冰箱门打开,瞅瞅有啥好吃的没，有，先吃光再说，昨晚的剩面条先吃了，前天的炸鸡排也赶紧吃了\n
+2：把长颈鹿拿出来\n
+3：把大象放进去，如果反抗，可以考虑里面放点好吃的引诱进去\n
+4：把门关上\n
+森林开会，大象没去,因为它在冰箱里\n
+去到一条平时很多鳄鱼的河，但是没桥，你要怎么过河！\n
+答：游过去，怎么过都可以，因为鳄鱼去开会去了。</string>
 </resources>
