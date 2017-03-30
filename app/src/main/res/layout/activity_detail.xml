@@ -1,36 +1,53 @@
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <data>
 
     </data>
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/web_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true"
-        android:orientation="vertical">
-
-        <com.liz.wangying.sosweet.view.AutoSplitTextView
-            android:id="@+id/auto_split_tv"
+        android:fitsSystemWindows="true">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycler_view_chat"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/chat_bar"
+            android:background="@android:color/transparent"
+            />
+        <LinearLayout
+            android:id="@+id/chat_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="@string/process"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:layout_marginTop="20dp"
-            />
+            android:orientation="horizontal"
+            android:layout_alignParentBottom="true"
+            android:background="#FFF">
+            <ImageView
+                android:id="@+id/main_activity_smile"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_smile"
+                tools:ignore="ContentDescription"/>
+            <EditText
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"/>
+            <ImageView
+                android:id="@+id/main_activity_send"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:padding="12dp"
+                android:scaleType="centerCrop"
+                app:srcCompat="@drawable/ic_send_msg"
+                tools:ignore="ContentDescription"/>
+        </LinearLayout>
 
-        <com.liz.wangying.sosweet.view.AutoSplitTextView
-            android:id="@+id/auto_split_tv2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textSize="14sp"
-            android:text="@string/process2"
-            android:paddingRight="16dp"
-            android:paddingLeft="16dp"
-            android:layout_marginTop="20dp"
-            />
-    </LinearLayout>
+    </RelativeLayout>
 </layout>
