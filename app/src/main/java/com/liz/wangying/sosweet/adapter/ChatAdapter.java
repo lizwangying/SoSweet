@@ -7,10 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
+import com.liz.wangying.sosweet.BR;
 import com.liz.wangying.sosweet.R;
+import com.liz.wangying.sosweet.databinding.ItemTalkBinding;
 import com.liz.wangying.sosweet.model.ChatBean;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     private Context mContext;
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
-    private ViewDataBinding binding;
+    private ItemTalkBinding binding;
 
     public ChatAdapter(Context mContext, List<ChatBean> list) {
         this.list = list;
@@ -44,19 +45,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
 
     @Override
     public void onBindViewHolder(ChatHolder holder, int position) {
-        holder.tvMsg.setText(list.get(position).getMsg());
-        holder.tvDate.setText(list.get(position).getDate());
+        holder.getBinding().setVariable(BR.chat,list.get(position));
         if (list.get(position).isReceive()) {
-            holder.tvMsg.setBackgroundResource(R.drawable.left_bubble);
-            holder.imMyIcon.setVisibility(View.GONE);
-            holder.imIcon.setVisibility(View.VISIBLE);
-
+            holder.chat_bg.setBackgroundResource(R.drawable.left_bubble);
         } else {
-            holder.tvMsg.setBackgroundResource(R.drawable.right_bubble);
-            holder.imMyIcon.setVisibility(View.VISIBLE);
-            holder.imIcon.setVisibility(View.GONE);
+            holder.chat_bg.setBackgroundResource(R.drawable.right_bubble);
         }
-
     }
 
     @Override
@@ -81,20 +75,21 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatHolder> {
     }
 
     static class ChatHolder extends RecyclerView.ViewHolder {
-        final TextView tvMsg;
-        final TextView tvDate;
-        final ImageView imIcon;
-        final ImageView imMyIcon;
+        final LinearLayout chat_bg;
         private ViewDataBinding binding;
 
         public ChatHolder(View itemView) {
             super(itemView);
             binding=DataBindingUtil.bind(itemView);
+            chat_bg = (LinearLayout) itemView.findViewById(R.id.chat_bg);
+        }
 
-                    tvMsg = (TextView) itemView.findViewById(R.id.tv_msg);
-            tvDate = (TextView) itemView.findViewById(R.id.tv_date);
-            imIcon = (ImageView) itemView.findViewById(R.id.im_chat_icon);
-            imMyIcon = (ImageView) itemView.findViewById(R.id.im_mine_chat_icon);
+        public void setBinding(ViewDataBinding binding){
+            this.binding = binding;
+        }
+
+        public ViewDataBinding getBinding(){
+            return this.binding;
         }
     }
 

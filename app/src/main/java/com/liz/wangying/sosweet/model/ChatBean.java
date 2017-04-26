@@ -1,11 +1,14 @@
 package com.liz.wangying.sosweet.model;
 
+import android.databinding.BaseObservable;
+
 /**
+ * desc: use data binding in RecyclerView ,so have to extends BaseObservable
  * Created by Liz on 2017/3/30.
  * email: lizwangying@icloud.com
  */
 
-public class ChatBean {
+public class ChatBean extends BaseObservable{
     public String msg;
     public String date;
     public boolean receive;

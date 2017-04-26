@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <plurals name="plural_name">
+        <item quantity="zero">这里啥都没有</item>
+        <item quantity="other">哈哈，好幸福</item>
+    </plurals>
+</resources>

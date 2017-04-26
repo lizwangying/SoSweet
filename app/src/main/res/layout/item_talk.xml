@@ -1,6 +1,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <data />
+    <data>
+        <import type="android.view.View"/>
+        <variable
+            name="chat"
+            type="com.liz.wangying.sosweet.model.ChatBean"/>
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,7 +24,7 @@
             android:text="date" />
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
             android:layout_marginLeft="16dp"
@@ -32,31 +37,41 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:src="@mipmap/ic_default" />
-
+                android:src="@mipmap/ic_default"
+                android:visibility="@{chat.receive?View.VISIBLE:View.INVISIBLE}"/>
             <View
-                android:id="@+id/view_stretch"
+                android:id="@+id/left_place_holder"
                 android:layout_width="0dp"
                 android:layout_height="1dp"
-                android:layout_weight="1" />
-
-            <TextView
-                android:id="@+id/tv_msg"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:visibility="@{chat.receive?View.GONE:View.VISIBLE}"/>
+
+            <LinearLayout
+                android:id="@+id/chat_bg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:background="@drawable/right_bubble"
-                android:gravity="center_vertical"
-                android:paddingLeft="25dp"
-                android:paddingRight="25dp"
-                android:text="sdfsdfsdfsdfsdfsdfsdfsdfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsfsddfsdfsdfsdfsfsddfsdfsdfsdfsfsdfsdfsdf" />
+                android:orientation="horizontal"
+                android:padding="5dp">
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@{chat.msg}"
+                    android:layout_gravity="center"
+                    android:gravity="center_horizontal"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"/>
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/im_mine_chat_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="bottom"
-                android:src="@mipmap/ic_default" />
+                android:src="@mipmap/ic_default"
+                android:visibility="@{chat.receive?View.INVISIBLE:View.VISIBLE}"/>
         </LinearLayout>
     </LinearLayout>
 </layout>

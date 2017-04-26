@@ -6,25 +6,28 @@
 
     </data>
 
-    <RelativeLayout
+    <LinearLayout
         android:id="@+id/web_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view_chat"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:layout_above="@+id/chat_bar"
-            android:background="@android:color/transparent"
-            />
+            android:background="@android:color/transparent" />
+
         <LinearLayout
             android:id="@+id/chat_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_alignParentBottom="true"
-            android:background="#FFF">
+            android:background="#FFF"
+            android:orientation="horizontal">
+
             <ImageView
                 android:id="@+id/main_activity_smile"
                 android:layout_width="48dp"
@@ -33,11 +36,17 @@
                 android:padding="12dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_smile"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription"
+                android:layout_gravity="center_vertical"/>
+
             <EditText
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:maxLines="3"
+                android:paddingLeft="5dp"
+                android:paddingRight="5dp"/>
+
             <ImageView
                 android:id="@+id/main_activity_send"
                 android:layout_width="48dp"
@@ -46,8 +55,18 @@
                 android:padding="12dp"
                 android:scaleType="centerCrop"
                 app:srcCompat="@drawable/ic_send_msg"
-                tools:ignore="ContentDescription"/>
+                tools:ignore="ContentDescription"
+                android:layout_gravity="center_vertical"/>
         </LinearLayout>
 
-    </RelativeLayout>
+        <!--跑马灯-->
+        <!--<com.liz.wangying.sosweet.view.AutoScrollTextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="30dp"-->
+            <!--android:text="sdfadfasfasdfasdfasdfdsfadf"-->
+            <!--android:inputType="text"-->
+            <!--android:background="#eee"-->
+            <!--android:id="@+id/TextViewNotice"-->
+            <!--/>-->
+    </LinearLayout>
 </layout>

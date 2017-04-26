@@ -8,6 +8,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import com.liz.wangying.sosweet.adapter.ChatAdapter;
 import com.liz.wangying.sosweet.databinding.ActivityDetailBinding;
 import com.liz.wangying.sosweet.model.ChatBean;
+import com.liz.wangying.sosweet.view.AutoScrollTextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -57,14 +58,14 @@ public class DetailActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_detail);
-
+        AutoScrollTextView autoScrollTextView;
         List<ChatBean> list = new ArrayList<>();
         ChatBean chat = new ChatBean();
         chat.setMsg("哈哈，第一次聊天");
         chat.setDate("17:18");
         chat.setReceive(true);
         ChatBean chat2 = new ChatBean();
-        chat2.setMsg("o");
+        chat2.setMsg("Hi");
         chat2.setDate("17:19");
         chat2.setReceive(false);
 
@@ -73,6 +74,10 @@ public class DetailActivity extends AppCompatActivity {
         binding.recyclerViewChat.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false));
         binding.recyclerViewChat.setAdapter(new ChatAdapter(DetailActivity.this,list));
 
+
+//        autoScrollTextView = (AutoScrollTextView)findViewById(R.id.TextViewNotice);
+//        autoScrollTextView.init(getWindowManager());
+//        autoScrollTextView.startScroll();
     }
 
 
