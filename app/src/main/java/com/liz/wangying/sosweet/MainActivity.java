@@ -11,9 +11,13 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.TextureView;
 import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.liz.wangying.sosweet.model.Banner;
@@ -64,6 +68,17 @@ public class MainActivity extends AppCompatActivity
         ref.child("banner1").setValue(banner1);
         ref.child("banner2").setValue(banner2);
 
+        final EditText editText = (EditText) findViewById(R.id.et_username);
+        Button button = (Button) findViewById(R.id.btn_toast);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String input = editText.getText().toString().trim();
+                if (!TextUtils.isEmpty(input)) {
+                    Toast.makeText(MainActivity.this, input, Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
 //        final ImageView heart = (ImageView) findViewById(R.id.heart);
 //        heart.setOnClickListener(new View.OnClickListener() {
 //            @Override
