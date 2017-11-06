@@ -17,6 +17,7 @@ The main feature may contains:
 * **Goal** Set a goal, and can update your progress until you finish.
 * **achievement** Do somthing for some days you can win a medal.
 * **Travel** Some suggestions about places for couples to travel. You can share on get advieses.
+* **Account book** Keep every penny count
 
 This app specially develop for Mr Li. :smile: :kiss: :heart:      
 
